@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         AWS_DEFAULT_REGION = 'us-east-1'
-        S3_BUCKET = 'amzn-nextgen'
+        S3_BUCKET = 'shiva-169237360288-us-east-1-an'
     }
 
     stages {
@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/jyothikaalla15/project-praticals-.git'
+                    url: 'https://github.com/Balamurugan-02/frontend.git'
             }
         }
 
@@ -39,7 +39,7 @@ pipeline {
                     sh '''
                       aws s3 sync build/ s3://${S3_BUCKET} --delete
                       aws cloudfront create-invalidation \
-                        --distribution-id E1QEK1LS9J2AK1 \
+                        --distribution-id EZUNXXB9FS9PY \
                         --paths "/*"
                     '''
                 }
