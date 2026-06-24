@@ -15,30 +15,21 @@ pipeline {
             }
         }
 
-        stage('Verify Node') {
-            steps {
-                sh '''
-                  node -v
-                  npm -v
-                '''
-            }
-        }
-
-        stage('Build React') {
-            steps {
-                sh '''
-                  npm install
-                  npm run build
-                '''
-            }
-        }
-
-        stage('Deploy to S3 & Invalidate CloudFront') {
+        stage('Deploy to S3') {
             steps {
                 withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
                     sh '''
-                      aws s3 sync build/ s3://${S3_BUCKET} --delete
-                      aws cloudfront create-invalidation \
+                        aws s3 sync . s3://${S3_BUCKET} --delete --exclude ".git/*"
+                    '''
+                }
+            }
+        }
+
+        stage('Invalidate CloudFront') {
+            steps {
+                withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
+                    sh '''
+                        aws cloudfront create-invalidation \
                         --distribution-id EZUNXXB9FS9PY \
                         --paths "/*"
                     '''
