@@ -30,7 +30,7 @@ pipeline {
                 withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
                     sh '''
                         aws cloudfront create-invalidation \
-                        --distribution-id EZUNXXB9FS9PY \
+                        --distribution-id E2T53CFXHCSAE4 \
                         --paths "/*"
                     '''
                 }
