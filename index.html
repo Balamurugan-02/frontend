@@ -1,26 +1,28 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Foodie Express</title>
+<title>Foodie Express Pro</title>
 
 <style>
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #1e293b, #0f172a);
+    background: linear-gradient(135deg, #0f172a, #1e1b4b, #0ea5e9);
     color: white;
 }
 
+/* Header */
 header {
-    background: #6366f1;
-    color: white;
+    background: linear-gradient(90deg, #ff00cc, #3333ff);
     padding: 20px;
     text-align: center;
+    font-size: 22px;
+    font-weight: bold;
 }
 
+/* Hero */
 .hero {
     text-align: center;
     padding: 60px 20px;
@@ -28,68 +30,83 @@ header {
 
 .hero h1 {
     font-size: 3rem;
-    margin-bottom: 10px;
-    color: #38bdf8;
+    background: linear-gradient(90deg, #22d3ee, #a78bfa, #f472b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .hero p {
     color: #cbd5e1;
-    margin-bottom: 25px;
 }
 
+/* Search */
 .search-box {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
+    margin-top: 20px;
 }
 
 .search-box input {
     padding: 14px;
     width: 320px;
+    border-radius: 10px;
     border: none;
-    border-radius: 8px;
+    outline: none;
 }
 
 .search-box button {
-    padding: 14px 24px;
+    padding: 14px 20px;
     border: none;
-    background: #10b981;
+    background: #22c55e;
     color: white;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
 .search-box button:hover {
-    background: #059669;
+    background: #16a34a;
 }
 
+/* Banner */
+.banner {
+    margin: 20px;
+    text-align: center;
+    padding: 15px;
+    background: linear-gradient(90deg, #f43f5e, #8b5cf6);
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+/* Cards */
 .restaurants {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
     padding: 40px;
 }
 
 .card {
-    background: #334155;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
     transition: 0.3s;
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
 .card:hover {
-    transform: translateY(-8px);
+    transform: scale(1.05);
 }
 
 .card img {
     width: 100%;
-    height: 200px;
+    height: 180px;
     object-fit: cover;
 }
 
 .card-content {
-    padding: 18px;
+    padding: 15px;
 }
 
 .card h3 {
@@ -105,11 +122,12 @@ header {
     font-weight: bold;
 }
 
+/* Footer */
 footer {
     text-align: center;
     padding: 20px;
     background: #020617;
-    color: white;
+    margin-top: 30px;
 }
 </style>
 </head>
@@ -117,70 +135,78 @@ footer {
 <body>
 
 <header>
-    <h1>🍽 Foodie Express</h1>
-    <p>Discover Delicious Food Near You</p>
+🍽 FOODIE EXPRESS PRO - CI/CD TEST
 </header>
 
 <section class="hero">
-    <h1>Order Your Favorite Meals</h1>
-    <p>Fast delivery from top-rated restaurants</p>
+    <h1>Craving Something Delicious?</h1>
+    <p>Find top restaurants near you instantly</p>
 
     <div class="search-box">
-        <input type="text" placeholder="Enter your location">
-        <button onclick="searchFood()">Explore Food</button>
+        <input type="text" id="searchInput" onkeyup="filterCards()" placeholder="Search food or restaurant...">
+        <button onclick="alert('Searching...')">Search</button>
     </div>
 </section>
 
-<section class="restaurants">
+<div class="banner">
+🔥 TOP DEALS TODAY: 50% OFF ON SELECTED RESTAURANTS
+</div>
 
-    <div class="card">
-        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800" alt="Pizza">
-        <div class="card-content">
-            <h3>Pizza Palace</h3>
-            <p>Pizza • Pasta • Garlic Bread</p>
-            <span class="rating">⭐ 4.9</span>
-        </div>
-    </div>
+<section class="restaurants" id="cardContainer">
 
-    <div class="card">
-        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800" alt="Burger">
-        <div class="card-content">
-            <h3>Burger Hub</h3>
-            <p>Burgers • Fries • Drinks</p>
-            <span class="rating">⭐ 4.7</span>
-        </div>
+<div class="card">
+    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800">
+    <div class="card-content">
+        <h3>Pizza Palace</h3>
+        <p>Pizza • Pasta • Garlic Bread</p>
+        <span class="rating">⭐ 4.9</span>
     </div>
+</div>
 
-    <div class="card">
-        <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800" alt="Biryani">
-        <div class="card-content">
-            <h3>Biryani House</h3>
-            <p>Indian • Biryani • Curry</p>
-            <span class="rating">⭐ 4.8</span>
-        </div>
+<div class="card">
+    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800">
+    <div class="card-content">
+        <h3>Burger Hub</h3>
+        <p>Burgers • Fries • Drinks</p>
+        <span class="rating">⭐ 4.7</span>
     </div>
+</div>
 
-    <div class="card">
-        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800" alt="Healthy Food">
-        <div class="card-content">
-            <h3>Green Bowl</h3>
-            <p>Healthy Meals • Salads • Fresh Juice</p>
-            <span class="rating">⭐ 4.9</span>
-        </div>
+<div class="card">
+    <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800">
+    <div class="card-content">
+        <h3>Biryani House</h3>
+        <p>Indian • Biryani • Curry</p>
+        <span class="rating">⭐ 4.8</span>
     </div>
+</div>
+
+<div class="card">
+    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800">
+    <div class="card-content">
+        <h3>Green Bowl</h3>
+        <p>Healthy Meals • Salads • Juice</p>
+        <span class="rating">⭐ 4.9</span>
+    </div>
+</div>
 
 </section>
 
 <footer>
-    <p>© 2026 Foodie Express | Built with HTML + CSS | Jenkins CI/CD Demo</p>
+© 2026 Foodie Express Pro | Jenkins Pipeline Test
 </footer>
 
 <script>
-function searchFood() {
-    alert("Searching restaurants near you...");
+function filterCards() {
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+        let text = card.innerText.toLowerCase();
+        card.style.display = text.includes(input) ? "" : "none";
+    });
 }
 </script>
 
 </body>
 </html>
-```
